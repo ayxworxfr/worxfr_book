@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.worxfr.dao.ReaderDetailMapper">
+  <resultMap id="BaseResultMap" type="com.worxfr.pojo.ReaderDetail">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="level_id" jdbcType="INTEGER" property="levelId" />
+    <result column="achievement" jdbcType="VARCHAR" property="achievement" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="info" jdbcType="VARCHAR" property="info" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, level_id, achievement, user_id, info
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from reader_detail
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from reader_detail
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.worxfr.pojo.ReaderDetail">
+    insert into reader_detail (id, level_id, achievement, 
+      user_id, info)
+    values (#{id,jdbcType=BIGINT}, #{levelId,jdbcType=INTEGER}, #{achievement,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=BIGINT}, #{info,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.worxfr.pojo.ReaderDetail">
+    insert into reader_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="levelId != null">
+        level_id,
+      </if>
+      <if test="achievement != null">
+        achievement,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="info != null">
+        info,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="levelId != null">
+        #{levelId,jdbcType=INTEGER},
+      </if>
+      <if test="achievement != null">
+        #{achievement,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="info != null">
+        #{info,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.worxfr.pojo.ReaderDetail">
+    update reader_detail
+    <set>
+      <if test="levelId != null">
+        level_id = #{levelId,jdbcType=INTEGER},
+      </if>
+      <if test="achievement != null">
+        achievement = #{achievement,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="info != null">
+        info = #{info,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.worxfr.pojo.ReaderDetail">
+    update reader_detail
+    set level_id = #{levelId,jdbcType=INTEGER},
+      achievement = #{achievement,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=BIGINT},
+      info = #{info,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

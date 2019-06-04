@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.worxfr.dao.PermissionDetailMapper">
+  <resultMap id="BaseResultMap" type="com.worxfr.pojo.PermissionDetail">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="permission" jdbcType="INTEGER" property="permission" />
+    <result column="resource" jdbcType="VARCHAR" property="resource" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, permission, resource
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from permission_detail
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from permission_detail
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.worxfr.pojo.PermissionDetail">
+    insert into permission_detail (id, permission, resource
+      )
+    values (#{id,jdbcType=BIGINT}, #{permission,jdbcType=INTEGER}, #{resource,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.worxfr.pojo.PermissionDetail">
+    insert into permission_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="permission != null">
+        permission,
+      </if>
+      <if test="resource != null">
+        resource,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="permission != null">
+        #{permission,jdbcType=INTEGER},
+      </if>
+      <if test="resource != null">
+        #{resource,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.worxfr.pojo.PermissionDetail">
+    update permission_detail
+    <set>
+      <if test="permission != null">
+        permission = #{permission,jdbcType=INTEGER},
+      </if>
+      <if test="resource != null">
+        resource = #{resource,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.worxfr.pojo.PermissionDetail">
+    update permission_detail
+    set permission = #{permission,jdbcType=INTEGER},
+      resource = #{resource,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

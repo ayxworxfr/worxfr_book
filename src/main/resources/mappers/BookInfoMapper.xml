@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.worxfr.dao.BookInfoMapper">
+  <resultMap id="BaseResultMap" type="com.worxfr.pojo.BookInfo">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="author" jdbcType="VARCHAR" property="author" />
+    <result column="type_id" jdbcType="INTEGER" property="typeId" />
+    <result column="last_chapter" jdbcType="VARCHAR" property="lastChapter" />
+    <result column="chapter_count" jdbcType="INTEGER" property="chapterCount" />
+    <result column="chapterlist_url" jdbcType="VARCHAR" property="chapterlistUrl" />
+    <result column="word_count" jdbcType="INTEGER" property="wordCount" />
+    <result column="keywords" jdbcType="VARCHAR" property="keywords" />
+    <result column="create_time" jdbcType="BIGINT" property="createTime" />
+    <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+    <result column="state" jdbcType="CHAR" property="state" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.worxfr.pojo.BookInfo">
+    <result column="description" jdbcType="LONGVARCHAR" property="description" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, url, name, author, type_id, last_chapter, chapter_count, chapterlist_url, word_count, 
+    keywords, create_time, update_time, state
+  </sql>
+  <sql id="Blob_Column_List">
+    description
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from book_info
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from book_info
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.worxfr.pojo.BookInfo">
+    insert into book_info (id, url, name, 
+      author, type_id, last_chapter, 
+      chapter_count, chapterlist_url, word_count, 
+      keywords, create_time, update_time, 
+      state, description)
+    values (#{id,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{author,jdbcType=VARCHAR}, #{typeId,jdbcType=INTEGER}, #{lastChapter,jdbcType=VARCHAR}, 
+      #{chapterCount,jdbcType=INTEGER}, #{chapterlistUrl,jdbcType=VARCHAR}, #{wordCount,jdbcType=INTEGER}, 
+      #{keywords,jdbcType=VARCHAR}, #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}, 
+      #{state,jdbcType=CHAR}, #{description,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.worxfr.pojo.BookInfo">
+    insert into book_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="author != null">
+        author,
+      </if>
+      <if test="typeId != null">
+        type_id,
+      </if>
+      <if test="lastChapter != null">
+        last_chapter,
+      </if>
+      <if test="chapterCount != null">
+        chapter_count,
+      </if>
+      <if test="chapterlistUrl != null">
+        chapterlist_url,
+      </if>
+      <if test="wordCount != null">
+        word_count,
+      </if>
+      <if test="keywords != null">
+        keywords,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null">
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null">
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="lastChapter != null">
+        #{lastChapter,jdbcType=VARCHAR},
+      </if>
+      <if test="chapterCount != null">
+        #{chapterCount,jdbcType=INTEGER},
+      </if>
+      <if test="chapterlistUrl != null">
+        #{chapterlistUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="wordCount != null">
+        #{wordCount,jdbcType=INTEGER},
+      </if>
+      <if test="keywords != null">
+        #{keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=CHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.worxfr.pojo.BookInfo">
+    update book_info
+    <set>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null">
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null">
+        type_id = #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="lastChapter != null">
+        last_chapter = #{lastChapter,jdbcType=VARCHAR},
+      </if>
+      <if test="chapterCount != null">
+        chapter_count = #{chapterCount,jdbcType=INTEGER},
+      </if>
+      <if test="chapterlistUrl != null">
+        chapterlist_url = #{chapterlistUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="wordCount != null">
+        word_count = #{wordCount,jdbcType=INTEGER},
+      </if>
+      <if test="keywords != null">
+        keywords = #{keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=CHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.worxfr.pojo.BookInfo">
+    update book_info
+    set url = #{url,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      type_id = #{typeId,jdbcType=INTEGER},
+      last_chapter = #{lastChapter,jdbcType=VARCHAR},
+      chapter_count = #{chapterCount,jdbcType=INTEGER},
+      chapterlist_url = #{chapterlistUrl,jdbcType=VARCHAR},
+      word_count = #{wordCount,jdbcType=INTEGER},
+      keywords = #{keywords,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT},
+      state = #{state,jdbcType=CHAR},
+      description = #{description,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.worxfr.pojo.BookInfo">
+    update book_info
+    set url = #{url,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      type_id = #{typeId,jdbcType=INTEGER},
+      last_chapter = #{lastChapter,jdbcType=VARCHAR},
+      chapter_count = #{chapterCount,jdbcType=INTEGER},
+      chapterlist_url = #{chapterlistUrl,jdbcType=VARCHAR},
+      word_count = #{wordCount,jdbcType=INTEGER},
+      keywords = #{keywords,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT},
+      state = #{state,jdbcType=CHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

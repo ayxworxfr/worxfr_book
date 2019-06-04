@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.worxfr.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.worxfr.pojo.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="num" jdbcType="VARCHAR" property="num" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="role_code" jdbcType="VARCHAR" property="roleCode" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="read_id" jdbcType="BIGINT" property="readId" />
+    <result column="organ" jdbcType="VARCHAR" property="organ" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="author_id" jdbcType="BIGINT" property="authorId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="vip" jdbcType="VARCHAR" property="vip" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, num, username, password, role_code, email, read_id, organ, phone, author_id, 
+    create_time, update_time, vip
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.worxfr.pojo.User">
+    insert into user (id, num, username, 
+      password, role_code, email, 
+      read_id, organ, phone, 
+      author_id, create_time, update_time, 
+      vip)
+    values (#{id,jdbcType=INTEGER}, #{num,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{roleCode,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{readId,jdbcType=BIGINT}, #{organ,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{authorId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{vip,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.worxfr.pojo.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="num != null">
+        num,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="roleCode != null">
+        role_code,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="readId != null">
+        read_id,
+      </if>
+      <if test="organ != null">
+        organ,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="authorId != null">
+        author_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="vip != null">
+        vip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="roleCode != null">
+        #{roleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="readId != null">
+        #{readId,jdbcType=BIGINT},
+      </if>
+      <if test="organ != null">
+        #{organ,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="authorId != null">
+        #{authorId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vip != null">
+        #{vip,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.worxfr.pojo.User">
+    update user
+    <set>
+      <if test="num != null">
+        num = #{num,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="roleCode != null">
+        role_code = #{roleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="readId != null">
+        read_id = #{readId,jdbcType=BIGINT},
+      </if>
+      <if test="organ != null">
+        organ = #{organ,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="authorId != null">
+        author_id = #{authorId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vip != null">
+        vip = #{vip,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.worxfr.pojo.User">
+    update user
+    set num = #{num,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      role_code = #{roleCode,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      read_id = #{readId,jdbcType=BIGINT},
+      organ = #{organ,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      author_id = #{authorId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      vip = #{vip,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

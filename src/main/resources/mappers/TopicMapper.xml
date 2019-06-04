@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.worxfr.dao.TopicMapper">
+  <resultMap id="BaseResultMap" type="com.worxfr.pojo.Topic">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="all_comment" jdbcType="INTEGER" property="allComment" />
+    <result column="prompt_comment" jdbcType="INTEGER" property="promptComment" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, title, all_comment, prompt_comment
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from topic
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from topic
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.worxfr.pojo.Topic">
+    insert into topic (id, title, all_comment, 
+      prompt_comment)
+    values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{allComment,jdbcType=INTEGER}, 
+      #{promptComment,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.worxfr.pojo.Topic">
+    insert into topic
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="allComment != null">
+        all_comment,
+      </if>
+      <if test="promptComment != null">
+        prompt_comment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="allComment != null">
+        #{allComment,jdbcType=INTEGER},
+      </if>
+      <if test="promptComment != null">
+        #{promptComment,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.worxfr.pojo.Topic">
+    update topic
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="allComment != null">
+        all_comment = #{allComment,jdbcType=INTEGER},
+      </if>
+      <if test="promptComment != null">
+        prompt_comment = #{promptComment,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.worxfr.pojo.Topic">
+    update topic
+    set title = #{title,jdbcType=VARCHAR},
+      all_comment = #{allComment,jdbcType=INTEGER},
+      prompt_comment = #{promptComment,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
